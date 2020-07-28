@@ -33,7 +33,7 @@ db.run(`INSERT INTO customers(first_name, last_name, email, phone, permitted) VA
 
   // close the database connection
   db.close();
-res.render ('done')
+res.send ('done')
 });
 
 
