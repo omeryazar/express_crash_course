@@ -36,6 +36,9 @@ app.use('/api/getdbname',require ('./routes/api/getdbname'));
 app.use('/api/putdb',require ('./routes/api/putdb'));
 app.use('/api/getcustomer',require ('./routes/api/getcustomer'));
 app.use('/api/putcustomer',require ('./routes/api/putcustomer'));
+app.use('/api/editcustomer',require ('./routes/api/editcustomer'));
+app.use('/api/updatecustomer',require ('./routes/api/updatecustomer'));
+
 
 const PORT = process.env.PORT || 5000;
 

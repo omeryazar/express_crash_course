@@ -22,18 +22,24 @@ router.post('/', (req, res) => {
     let db = new sqlite3.Database(dbname, (err) => {});
 
 
+    // let sql =    `SELECT *      
+    // FROM customers
+    // WHERE phone  = ?`;
 
-db.run(`INSERT INTO customers(first_name, last_name, email, phone, permitted) VALUES(?,?,?,?,?)`, [first_name,last_name,email,phone,permitted], function(err) {
+db.run (  `INSERT INTO customers(first_name, last_name, email, phone, permitted) VALUES(?,?,?,?,?)`, 
+          [first_name, last_name, email, phone, permitted], function(err) {
     if (err) {
-      return console.log(err.message);
+      //return console.log(err.message);
+      res.send (err.message);
     }
     // get the last insert id
     console.log(`A row has been inserted with rowid ${this.lastID}`);
+    res.render('success')
   });
 
   // close the database connection
   db.close();
-res.send ('done')
+
 });
 
 
