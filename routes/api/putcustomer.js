@@ -27,14 +27,25 @@ router.post('/', (req, res) => {
     // WHERE phone  = ?`;
 
 db.run (  `INSERT INTO customers(first_name, last_name, email, phone, permitted) VALUES(?,?,?,?,?)`, 
-          [first_name, last_name, email, phone, permitted], function(err) {
+          [first_name, last_name, email, phone, permitted], function(err, row) {
     if (err) {
       //return console.log(err.message);
       res.send (err.message);
     }
     // get the last insert id
     console.log(`A row has been inserted with rowid ${this.lastID}`);
-    res.render('success')
+    res.render('success', {
+
+      title: 'Customer created:',
+      first_name, 
+      last_name, 
+      email: email, 
+      phone: phone, 
+      permitted: permitted
+
+    }
+    
+    )
   });
 
   // close the database connection
