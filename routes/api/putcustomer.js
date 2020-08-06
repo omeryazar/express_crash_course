@@ -17,7 +17,9 @@ router.post('/', (req, res) => {
  let phone = req.body.phone;
  let permitted = req.body.permitted;
 
- dbname = path.join(__dirname, 'databases', 'test2');
+ //WATCH OUT - HARDCODED DB NAME
+ dbname = ('databases/' + 'test2');
+ //dbname = path.join('../../databases', 'test2');
 
     let db = new sqlite3.Database(dbname, (err) => {});
 

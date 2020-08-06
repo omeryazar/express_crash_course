@@ -30,13 +30,13 @@ app.get('/', (req, res) => res.render('index', {
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'images')));
+app.use("/images", express.static(path.join(__dirname, 'public', 'images')))
+
+
 
 app.use('/api/members',require ('./routes/api/members'));
-app.use('/api/getdbname',require ('./routes/api/getdbname'));
-app.use('/api/putdb',require ('./routes/api/putdb'));
-app.use('/api/getcustomer',require ('./routes/api/getcustomer'));
-app.use('/api/putcustomer',require ('./routes/api/putcustomer'));
+app.use('/api/createdb',require ('./routes/api/createdb'));
+app.use('/api/createcustomer',require ('./routes/api/createcustomer'));
 app.use('/api/editcustomer',require ('./routes/api/editcustomer'));
 app.use('/api/updatecustomer',require ('./routes/api/updatecustomer'));
 
