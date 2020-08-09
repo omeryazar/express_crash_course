@@ -38,15 +38,30 @@ router.post('/', (req, res) => {
    
    
    
-   db.run (  `INSERT INTO customers(first_name, last_name, email, phone, permitted) VALUES(?,?,?,?,?)`, 
-             [first_name, last_name, email, phone, permitted], function(err, row) {
-       if (err) {
-         //return console.log(err.message);
-         res.send (err.message);
-       }
-       // get the last insert id
-       console.log(`A row has been inserted with rowid ${this.lastID}`);
-       res.render('success', {
+   let sql =   `INSERT INTO customers (first_name, last_name, email, phone, permitted) VALUES 
+   (?, ?, ?, ?, ?)` ;
+
+console.log(sql);
+
+db.all(sql, [first_name, last_name, email, phone, permitted], (err, rows) => {
+
+  if (err) {
+    throw err;
+  }
+  console.log('inserted');
+});
+
+
+  let sql2 = `SELECT * FROM customers where phone = ?`;
+
+  
+db.each(sql2, [phone], (err, row) => {
+
+  if (err) {
+    throw err;
+  }
+  console.log(row.first_name, row.last_name);
+  res.render('success', {
    
          title: 'Customer created:',
          first_name, 
@@ -55,19 +70,16 @@ router.post('/', (req, res) => {
          phone, 
          permitted
    
-       }
-       
-       )
-     });
-   
+       });
+
+        
+      });
      // close the database connection
      db.close();
    
-   });
-   
+  
+});
 
 
 module.exports = router;
-
-
 

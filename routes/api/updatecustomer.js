@@ -4,6 +4,7 @@ const router = express.Router();
 const exphbs = require('express-handlebars');
 const sqlite3 = require('sqlite3')
 const path = require('path');
+const os = require('os');
 
 // Add customer to database
 router.post('/', (req, res) => {
@@ -15,30 +16,39 @@ router.post('/', (req, res) => {
     let phone = req.body.phone;
     let permitted = req.body.permitted;
    
-    dbname = path.join(__dirname, 'databases', 'test2');
+    dbname = path.join('public', 'databases', os.hostname());
    
-       let db = new sqlite3.Database(dbname, (err) => {});
+    let db = new sqlite3.Database(dbname, (err) => {});
    
-   
-       // let sql =    `SELECT *      
-       // FROM customers
-       // WHERE phone  = ?`;
-   
-   db.run (  `UPDATE customers SET first_name = ?, last_name = ?, email = ?, phone = ?, permitted = ? 
-            WHERE phone = ?`, function(err) {
-       if (err) {
-         //return console.log(err.message);
-         res.send (err.message);
-       }
-       // get the last insert id
-       console.log('Customer with phone: ' + phone + ' was updated');
-       res.render('success')
-     });
-   
-     // close the database connection
-     db.close();
-   
-   });
-   
-   
-   module.exports= router;
+    db.get (  `SELECT * FROM customers where phone = ?`, 
+    [phone], (err, row) => {
+if (err) {
+
+  return console.log(err.message);
+
+}
+
+
+  
+  res.render('success', {
+  
+    title: 'Updated Data for Customer: ',
+    first_name: row.first_name, 
+    last_name: row.last_name,
+    email: row.email, 
+    phone: row.phone, 
+    permitted: row.permitted
+  })
+
+// console.log(`No customer found with phone ${phone}`);
+ });
+
+
+
+// close the database connection
+db.close();
+
+});
+
+
+module.exports= router;

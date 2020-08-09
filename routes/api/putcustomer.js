@@ -24,10 +24,6 @@ router.post('/', (req, res) => {
     let db = new sqlite3.Database(dbname, (err) => {});
 
 
-    // let sql =    `SELECT *      
-    // FROM customers
-    // WHERE phone  = ?`;
-
 db.run (  `INSERT INTO customers(first_name, last_name, email, phone, permitted) VALUES(?,?,?,?,?)`, 
           [first_name, last_name, email, phone, permitted], function(err, row) {
     if (err) {

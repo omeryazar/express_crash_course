@@ -22,50 +22,42 @@ router.post('/', (req, res) => {
   let phone = req.body.phone;
  
   
- //WATCH OUT - HARDCODED DB NAME
+ 
  dbname = path.join('public', 'databases', os.hostname());
- //dbname = path.join('../../databases', 'test2');
+ 
+
 
     let db = new sqlite3.Database(dbname, (err) => {});
 
+    db.get (  `SELECT * FROM customers where phone = ?`, 
+    [phone], (err, row) => {
+if (err) {
 
-    let sql =    `SELECT *      
-                  FROM customers
-                  WHERE phone  = ?`;
+  return console.log(err.message);
 
-db.get (sql, [phone], function(err, row) {
-    if (err) {
-      //return console.log(err.message);
-      res.send (err.message);
-    }
-    // get the last insert id
-    console.log(`A customer has been FOUND with phone number:  ${phone}`);
-    
-    return row
-    ? res.render('success', {
-      first_name: row.first_name, 
-      last_name: row.last_name, 
-      email: row.email, 
-      phone: row.phone, 
-      permited: row.permitted
+}
 
 
-    }
-    )
-    
-    //console.log(row.first_name)
-      
-    //: console.log(`No cutomer found with phone number:  ${phone}`);
-    : res.render('notfound', {
-      phone
+  
+  res.render('editcustomer', {
+  
+    title: 'Edit Customer:',
+    first_name: row.first_name, 
+    last_name: row.last_name,
+    email: row.email, 
+    phone: row.phone, 
+    permitted: row.permitted
+  })
 
-    })
-   
-  });
-   // close the database connection
-   db.close();
-   
+// console.log(`No customer found with phone ${phone}`);
  });
- 
+
+
+
+// close the database connection
+db.close();
+
+});
+
 
 module.exports= router;

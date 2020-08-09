@@ -40,7 +40,7 @@ console.log(dbname);
         permitted TEXT NOT NULL 
     )`;
 
-    db.all(sql, [], (err, rows) => {
+    db.all(sql, (err, rows) => {
         if (err) {
             throw err;
         }
