@@ -39,9 +39,9 @@ app.use('/api/createdb',require ('./routes/api/createdb'));
 app.use('/api/createcustomer',require ('./routes/api/createcustomer'));
 app.use('/api/editcustomer',require ('./routes/api/editcustomer'));
 app.use('/api/updatecustomer',require ('./routes/api/updatecustomer'));
-
-
-
+app.use('/api/listallcustomers',require ('./routes/api/listallcustomers'));
+app.use('/api/readexcel',require ('./routes/api/readexcel'));
+app.use('/api/uploadcustomers',require ('./routes/api/uploadcustomers'));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

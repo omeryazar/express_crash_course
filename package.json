@@ -12,10 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.10",
     "express-handlebars": "^5.1.0",
+    "formidable": "^1.2.2",
     "moment": "^2.27.0",
     "sqlite3": "^5.0.0",
-    "uuid": "^8.2.0"
+    "uuid": "^8.2.0",
+    "xlsx": "^0.16.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

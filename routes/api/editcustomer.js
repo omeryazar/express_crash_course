@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3')
 const path = require('path');
 const os = require('os');
 
-// Add customer to database
+
 
 
 
@@ -29,6 +29,7 @@ router.post('/', (req, res) => {
 
     let db = new sqlite3.Database(dbname, (err) => {});
 
+    
     db.get (  `SELECT * FROM customers where phone = ?`, 
     [phone], (err, row) => {
 if (err) {

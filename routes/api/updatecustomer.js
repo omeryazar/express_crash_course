@@ -40,7 +40,7 @@ if (err) {
     permitted: row.permitted
   })
 
-// console.log(`No customer found with phone ${phone}`);
+
  });
 
 

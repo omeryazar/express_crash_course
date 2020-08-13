@@ -1,0 +1,33 @@
+
+<h1 class="text center mb-3">{{title}}</h1>
+
+<table>
+<th>First name</th>
+<th>Last name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Permitted?</th>
+{{#each rows}}
+
+<tr>
+    <td>
+        {{this.first_name}}
+    </td>
+
+    <td>
+        {{this.last_name}}
+    </td>
+ <td>
+        {{this.email}}
+    </td>
+     <td>
+        {{this.phone}}
+    </td>
+     <td>
+        {{this.permitted}}
+    </td>
+</tr>
+
+{{/each}}
+
+</table>
