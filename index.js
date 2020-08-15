@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path')
 const exphbs = require('express-handlebars');
 const members = require('./Members');
+const checkfilename = require('./middleware/checkfilename.js')
 
 const logger = require('./middleware/logger');
 
@@ -42,7 +43,11 @@ app.use('/api/updatecustomer',require ('./routes/api/updatecustomer'));
 app.use('/api/listallcustomers',require ('./routes/api/listallcustomers'));
 app.use('/api/readexcel',require ('./routes/api/readexcel'));
 app.use('/api/uploadcustomers',require ('./routes/api/uploadcustomers'));
+app.use('/api/functiontest',require ('./routes/api/functiontest'));
+app.use('checkfilename',require ('./middleware/checkfilename'));
 const PORT = process.env.PORT || 5000;
+
+app.use(checkfilename)
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 

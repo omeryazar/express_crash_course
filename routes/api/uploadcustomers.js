@@ -6,6 +6,7 @@ const path = require('path');
 const os = require('os');
 const formidable = require('formidable');
 const fs = require ('fs');
+const checkfilename = require('../../middleware/checkfilename');
 
 
 
@@ -21,6 +22,13 @@ router.get('/', (req, res) => {
  router.post('/', function(req, res) {
   var form = new formidable.IncomingForm();
   form.parse(req, function (err, fields, files) {
+
+    console.log(files.filetoupload.name)
+  //  console.log( checkfilename(files.filetoupload.name));
+
+   if (checkfilename(files.filetoupload.name) === true) {
+
+    console.log('True')
     var oldpath = files.filetoupload.path;
     var newpath = path.join('public', 'uploads', files.filetoupload.name);
     fs.rename(oldpath, newpath, function (err) {
@@ -29,6 +37,11 @@ router.get('/', (req, res) => {
       res.end();
     
   });
+    
+   } else {
+     alert('False')
+   }
+   
 });
 });
 
