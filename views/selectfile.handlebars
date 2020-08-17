@@ -1,0 +1,29 @@
+
+
+<h1 class="text center mb-3">{{title}}</h1>
+{{!-- 
+{{#each items}}
+
+{{this}}
+
+{{/each}} --}}
+
+
+<form action="/api/addtodatabase" method="POST" class="mb-4">
+<div class="form-group">
+
+
+{{#each items}} 
+  
+    <input type="radio" id="{{this}}" name="filename" value="{{this}}">
+
+      <label for={{this}}>{{this}}</label><br>
+    
+    
+    {{/each}}
+    
+    </div>
+
+<input type="submit" value="Add customers in file" class="btn-primary btn-block">
+</form> 
+ 

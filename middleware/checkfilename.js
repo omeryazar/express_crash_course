@@ -1,22 +1,32 @@
 
 const path = require('path');
+const XLSX = require('xlsx');
+const express = require('express');
+const checkformat = require('./checkformat');
 
 
-const checkfilename = function(filename) {
+//Excel file must be protected so that arbitrary formats are not received
 
-    allowedfiletypes = ['.xls', '.xlsx', '.XLS', '.XLSX'];
-  
+//Check file name
+ const checkfilename = function(req, res, filename) {
+  allowedfiletypes = ['.xls', '.xlsx', '.XLS', '.XLSX'];
   extension = path.extname(filename);
+
   if (allowedfiletypes.indexOf(extension) > -1) {
-  
-    return(true);
-    console.log('OK');
+
+    
+    checkformat(req, res, filename);
+
   } else {
-    return(false);
-    console.log('Not OK');
+
+     res.render('failed', {
+     message: `The selected filetype ${extension} is not Excel`
+  });
+
   }
   
   
-  }
+ };
+  
   
   module.exports= checkfilename;
