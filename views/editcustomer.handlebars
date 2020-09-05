@@ -1,23 +1,22 @@
-
 <h1 class="text center mb-3">{{title}}</h1>
 
 
 
 <form action="/api/updatecustomer" method="POST" class="mb-4">
-<div class="form-group">
-    <label for="first_name">Enter customer first name</label>
-    <input type="text" name="first_name" value = "{{first_name}}" class="form-control">
-    <label for="last_name">Enter customer last name</label>
-    <input type="text" name="last_name" value = "{{last_name}}" class="form-control">
-    <label for="email">Enter customer email</label>
-    <input type="email" name="email" value = "{{email}}" class="form-control">
-    <label for="phone">Enter customer phone</label>
-    <input type="text" name="phone" value = "{{phone}}" readonly class="form-control">
-    <label for="permitted">Enter customer permission status</label>
-    <input type="text" name="permitted" value = "{{permitted}}" class="form-control">
-    
-    
-    </div>
-<input type="submit" value="Save Customer" class="btn-primary btn-block">
-</form>
+    <div class="form-group">
+        <label for="first_name">Enter customer first name</label>
+        <input type="text" name="first_name" value="{{first_name}}" class="form-control">
+        <label for="last_name">Enter customer last name</label>
+        <input type="text" name="last_name" value="{{last_name}}" class="form-control">
+        <label for="email">Enter customer email</label>
+        <input type="email" name="email" value="{{email}}" class="form-control">
+        <label for="phone">Enter customer phone</label>
+        <input type="text" name="phone" value="{{phone}}" readonly class="form-control">
+        <label for="permitted">Enter customer permission status</label>
+        <input type="text" name="permitted" value="{{permitted}}" class="form-control">
+        <label for="segment">Enter customer segment</label>
+        <input type="text" name="segment" value="{{segment}}" class="form-control">
 
+    </div>
+    <input type="submit" value="Save Customer" class="btn-primary btn-block">
+</form>

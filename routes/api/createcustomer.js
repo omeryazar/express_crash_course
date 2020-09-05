@@ -29,24 +29,27 @@ router.post('/', (req, res) => {
     let email = req.body.email;
     let phone = req.body.phone;
     let permitted = req.body.permitted;
+    let segment = req.body.segment;
    
-    //Warning OUT - HARDCODED DB NAME
+    
     dbname = path.join('public', 'databases', os.hostname());
-    //dbname = path.join('../../databases', 'test2');
+    
    
        let db = new sqlite3.Database(dbname, (err) => {});
    
    
    
-   let sql =   `INSERT INTO customers (first_name, last_name, email, phone, permitted) VALUES 
-   (?, ?, ?, ?, ?)` ;
+   let sql =   `INSERT INTO customers (first_name, last_name, email, phone, permitted, segment) VALUES 
+   (?, ?, ?, ?, ?, ?)` ;
 
 console.log(sql);
 
-db.all(sql, [first_name, last_name, email, phone, permitted], (err, rows) => {
+db.all(sql, [first_name, last_name, email, phone, permitted, segment], (err, rows) => {
 
   if (err) {
-    throw err;
+    res.render('failed', {
+      message: `Database error: ${err}`
+    })
   }
   console.log('inserted');
 });
@@ -58,6 +61,10 @@ db.all(sql, [first_name, last_name, email, phone, permitted], (err, rows) => {
 db.each(sql2, [phone], (err, row) => {
 
   if (err) {
+    res.render('failed', {
+      message: `Database error: ${err}`
+    })
+
     throw err;
   }
   console.log(row.first_name, row.last_name);
@@ -68,7 +75,8 @@ db.each(sql2, [phone], (err, row) => {
          last_name, 
          email, 
          phone, 
-         permitted
+         permitted,
+         segment
    
        });
 

@@ -4,6 +4,7 @@ const router = express.Router();
 const exphbs = require('express-handlebars');
 const sqlite3 = require('sqlite3')
 const path = require('path');
+const os = require('os');
 
 // Add customer to database
 
@@ -17,9 +18,9 @@ router.post('/', (req, res) => {
  let phone = req.body.phone;
  let permitted = req.body.permitted;
 
- //WATCH OUT - HARDCODED DB NAME
- dbname = ('databases/' + 'test2');
- //dbname = path.join('../../databases', 'test2');
+ 
+ dbname = path.join('public', 'databases', os.hostname());
+ 
 
     let db = new sqlite3.Database(dbname, (err) => {});
 
@@ -27,10 +28,12 @@ router.post('/', (req, res) => {
 db.run (  `INSERT INTO customers(first_name, last_name, email, phone, permitted) VALUES(?,?,?,?,?)`, 
           [first_name, last_name, email, phone, permitted], function(err, row) {
     if (err) {
-      //return console.log(err.message);
-      res.send (err.message);
+ 
+      res.render('failed', {
+        message: `Database error: ${err}`
+      })
     }
-    // get the last insert id
+ 
     console.log(`A row has been inserted with rowid ${this.lastID}`);
     res.render('success', {
 

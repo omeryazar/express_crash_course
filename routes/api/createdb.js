@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
 
     //Warning: Using hostname as database name
     dbname = path.join('public', 'databases', os.hostname());
+    
 console.log(dbname);
     let db = new sqlite3.Database(dbname, (err) => {
     if (err) {
@@ -35,9 +36,10 @@ console.log(dbname);
         contact_id INTEGER PRIMARY KEY,
         first_name TEXT NOT NULL,
         last_name TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE,
+        email TEXT NOT NULL,
         phone TEXT NOT NULL UNIQUE,
-        permitted TEXT NOT NULL 
+        permitted TEXT NOT NULL ,
+        segment TEXT NOT NULL
     )`;
 
     db.all(sql, (err, rows) => {

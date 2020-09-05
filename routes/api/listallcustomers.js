@@ -37,18 +37,9 @@ db.all(sql,  (err, rows) => {
         rows
     });
 
-    rows.forEach((row) => {
-      console.log(row.first_name);
-    });
 
   });
   
-// console.log(`No customer found with phone ${phone}`);
-//  });
-
-
-
-
 
 // close the database connection
 db.close();
