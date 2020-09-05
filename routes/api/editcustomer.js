@@ -12,7 +12,9 @@ const os = require('os');
 //Initial response
 router.get('/', (req, res) => {
   res.render('findcustomer', {
-    title: 'Select Customer to Edit'
+    title: 'Select Customer to Edit',
+    next_action: '/api/editcustomer',
+    next_action_name: 'Save Customer'
   });
 
 });
@@ -33,33 +35,47 @@ router.post('/', (req, res) => {
     [phone],
     (err, row) => {
       if (err) {
+        res.render("failed", {
+          message: err.message
+        });
 
         return console.log(err.message);
 
       }
 
-      console.log(row);
+      if (row === undefined) {
 
-      res.render('editcustomer', {
+        res.render("failed", {
+          message: `No customer with phone ${phone} found.`
+        })
+      } else {
 
-        title: 'Edit Customer:',
-        first_name: row.first_name,
-        last_name: row.last_name,
-        email: row.email,
-        phone: row.phone,
-        permitted: row.permitted,
-        segment: row.segment
-      })
+        res.render('editcustomer', {
 
-      // console.log(`No customer found with phone ${phone}`);
-    });
+          title: 'Edit Customer:',
+          first_name: row.first_name,
+          last_name: row.last_name,
+          email: row.email,
+          phone: row.phone,
+          permitted: row.permitted,
+          segment: row.segment,
+          next_action: 'updatecustomer',
+          next_action_name: 'Update Customer'
+        })
+
+      }
 
 
 
-  // close the database connection
-  db.close();
 
-});
+      // close the database connection
+      db.close();
+
+
+    })
+})
+
+
 
 
 module.exports = router;
