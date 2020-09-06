@@ -1,8 +1,11 @@
 {
 	"name": "express_crash_course",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
+	"description": "Start building your next Node.js Express app on IBM Cloud.",
+	"private": true,
+	"engines": {
+		"node": "^12.0.0"
+	},
 	"scripts": {
 		"start": "node server/server.js",
 		"dev": "nodemon index"
