@@ -27,16 +27,17 @@ const checkmailformatmw = function (req, res, xlText) {
         }
     }
 
-    if (wrongmail.length > 0) {
+    if (wrongmail.length === 0) {
+
+        console.log('All mails are correct')
+        checkphonenumbermw(req, res, xlText)
+    } else {
         console.log('wrong mails')
         res.render('failed', {
             message: `Wrong mails: ${wrongmail}`
         });
         return false;
 
-    } else {
-        console.log('All mails are correct')
-        checkphonenumbermw(req, res, xlText)
     }
 }
 module.exports = checkmailformatmw;
