@@ -3,11 +3,24 @@ const path = require('path')
 const exphbs = require('express-handlebars');
 const members = require('./Members');
 
+const bodyParser = require('body-parser');
+const healthRoutes = require('./routes/health-route');
+const swaggerRoutes = require('./routes/swagger-route');
+
 
 // const logger = require('./middleware/logger');
 
 
 const app = express();
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
+
+app.use('/health', healthRoutes);
+app.use('/swagger', swaggerRoutes);
 
 //Init middleware
 //app.use(logger);
@@ -61,6 +74,14 @@ app.use('/api/sendwhatsapp', require('./routes/api/sendwhatsapp'));
 
 const PORT = process.env.PORT || 5000;
 
+app.listen(port, () => {
+    console.log(`App UI available http://localhost:${port}`);
+    console.log(`Swagger UI available http://localhost:${port}/swagger/api-docs`);
+});
 
+// error handler for unmatched routes or api calls
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, '../public', '404.html'));
+});
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+module.exports = app;
