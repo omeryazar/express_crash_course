@@ -9,6 +9,8 @@ const checkfilenamemw = require("../../middleware/new/checkfilenamemw");
 
 router.post("/", (req, res) => {
 
+    var xlText = undefined
+
     function prepare() {
         return new Promise((resolve, reject) => {
 
