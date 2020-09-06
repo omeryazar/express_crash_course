@@ -2,12 +2,12 @@
 applications:
   - instances: 1
     timeout: 180
-    name: express_crash_course
+    name: kuzeynam
     buildpack: sdk-for-nodejs
     command: npm start
     disk_quota: 1G
     memory: 128MB
     domain: eu-gb.mybluemix.net
-    host: express_crash_course
+    host: kuzeynam
     env:
       OPTIMIZE_MEMORY: true
