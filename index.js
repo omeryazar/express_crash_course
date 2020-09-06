@@ -72,7 +72,7 @@ app.use('/api/optout', require('./routes/api/optout'));
 app.use('/api/sendwhatsapp', require('./routes/api/sendwhatsapp'));
 
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`App UI available http://localhost:${port}`);
